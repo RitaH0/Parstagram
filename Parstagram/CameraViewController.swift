@@ -44,6 +44,11 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         
     }
     
+    @IBAction func onCancellButton(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
     @IBAction func onCameraButton(_ sender: Any) {
         let picker = UIImagePickerController()
         picker.delegate = self
@@ -62,12 +67,11 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         let image = info[.editedImage] as! UIImage
         
         let size = CGSize(width: 300, height: 300)
-        let scaledImage = image.af_imageScaled(to: size)//rescaled the image
+        let scaledImage = image.af_imageAspectScaled(toFill: size)//rescaled the image
         
         imageView.image = scaledImage//assign it to the image
         
         dismiss(animated: true, completion: nil)
-        
         
     }
     /*
